@@ -13,7 +13,7 @@ This project will assure you have mastered the subjects covered in the statistic
 <a id='intro'></a>
 ### Introduction
 
-A/B tests are very commonly performed by data analysts and data scientists.  It is important that you get some practice working with the difficulties of these 
+A/B tests are very commonly performed by data analysts and data scientists.  It is important that you get some practice working with the difficulties of these
 
 For this project, you will be working to understand the results of an A/B test run by an e-commerce website.  Your goal is to work through this notebook to help the company understand if they should implement the new page, keep the old page, or perhaps run the experiment longer to make their decision.
 
@@ -195,7 +195,7 @@ df.isnull().values.any()
 
 
 
-`2.` For the rows where **treatment** is not aligned with **new_page** or **control** is not aligned with **old_page**, we cannot be sure if this row truly received the new or old page.  Use **Quiz 2** in the classroom to provide how we should handle these rows.  
+`2.` For the rows where **treatment** is not aligned with **new_page** or **control** is not aligned with **old_page**, we cannot be sure if this row truly received the new or old page.  Use **Quiz 2** in the classroom to provide how we should handle these rows.
 
 a. Now use the answer to the quiz to create a new dataset that meets the specifications from the quiz.  Store your new dataframe in **df2**.
 
@@ -251,7 +251,7 @@ df2[df2.duplicated('user_id')]['user_id']
 
 
 
-c. What is the row information for the repeat **user_id**? 
+c. What is the row information for the repeat **user_id**?
 
 
 ```python
@@ -381,11 +381,11 @@ e. Consider your results from a. through d. above, and explain below whether you
 <a id='ab_test'></a>
 ### Part II - A/B Test
 
-Notice that because of the time stamp associated with each event, you could technically run a hypothesis test continuously as each observation was observed.  
+Notice that because of the time stamp associated with each event, you could technically run a hypothesis test continuously as each observation was observed.
 
-However, then the hard question is do you stop as soon as one page is considered significantly better than another or does it need to happen consistently for a certain amount of time?  How long do you run to render a decision that neither page is better than another?  
+However, then the hard question is do you stop as soon as one page is considered significantly better than another or does it need to happen consistently for a certain amount of time?  How long do you run to render a decision that neither page is better than another?
 
-These questions are the difficult parts associated with A/B tests in general.  
+These questions are the difficult parts associated with A/B tests in general.
 
 
 `1.` For now, consider you need to make the decision just based on all the data provided.  If you want to assume that the old page is better unless the new page proves to be definitely better at a Type I error rate of 5%, what should your null and alternative hypotheses be?  You can state your hypothesis in terms of words or in terms of **$p_{old}$** and **$p_{new}$**, which are the converted rates for the old and new pages.
@@ -406,7 +406,7 @@ Use the cells below to provide the necessary parts of this simulation.  If this 
 ab_data_converted = df2.converted.mean()
 ```
 
-a. What is the **convert rate** for $p_{new}$ under the null? 
+a. What is the **convert rate** for $p_{new}$ under the null?
 
 
 ```python
@@ -528,7 +528,7 @@ plt.hist(p_diffs);
 ```
 
 
-![png](output_57_0.png)
+![png](img/output_57_0.png)
 
 
 j. What proportion of the **p_diffs** are greater than the actual difference observed in **ab_data.csv**?
@@ -566,12 +566,12 @@ plt.axvline(obs_diff, color='purple');
 ```
 
 
-![png](output_61_0.png)
+![png](img/output_61_0.png)
 
 
 k. In words, explain what you just computed in part **j.**  What is this value called in scientific studies?  What does this value mean in terms of whether or not there is a difference between the new and old pages?
 
-**R:** Foi computada a média de vezes em que o valor da diferença da conversão da nova página para a antiga na simulação, foi maior que a diferença das médias das páginas novas e antigas da base de dados. 
+**R:** Foi computada a média de vezes em que o valor da diferença da conversão da nova página para a antiga na simulação, foi maior que a diferença das médias das páginas novas e antigas da base de dados.
 O valor calculado é chamado de valor-p, ele representa a probabilidade de se obter uma estatística de teste igual ou mais extrema que aquela observada em uma amostra sob a hipótese nula. Como mostrado no histograma acima, e no valor-p obtido, temos 90,81% de chance de obtermos uma estatística igual ou acima da diferença observada (-0.0015782389853555567), o que é bem acima do limite de 5% descrito no problema. Para rejeitarmos a hipótese nula, o valor-p deveria ser menor que o valor alfa (Taxa de erro limite do tipo I, que é 5%), ou seja, falhamos ao rejeitar a hipótese nula, então a página antiga deveria ser mantida.
 
 l. We could also use a built-in to achieve similar results.  Though using the built-in might be easier to code, the above portions are a walkthrough of the ideas that are critical to correctly thinking about statistical significance. Fill in the below to calculate the number of conversions for each page, as well as the number of individuals who received each page. Let `n_old` and `n_new` refer the the number of rows associated with the old page and new pages, respectively.
@@ -622,7 +622,7 @@ z_score, p_value
 
 n. What do the z-score and p-value you computed in the previous question mean for the conversion rates of the old and new pages?  Do they agree with the findings in parts **j.** and **k.**?
 
-**R:** O z-score é a quantidade de desvios padrões que o valor observado está distante da média. No caso como obtivemos um z-score de -1.3109241984234394, significa que o valor observado está a 1.3x desvios padrões distante da média para o lado esquerdo da distribuição normal (Pois é menor que a média). Temos então que a partir deste valor, a probabilidade de que qualquer outro valor observado seja maior o valor que recai sobre o z-score é de 90,50%, que corresponde a área direita da distribuição normal apartir deste ponto, já que estamos verificando uma alternativa que deve ser maior. Sendo assim, verificamos que a hipótese nula falha a ser rejeitada, já que 0.9050583127590245 (valor-p próximo ao encontrado em **j.** e **k.**) é maior que nosso alfa de 0.5. 
+**R:** O z-score é a quantidade de desvios padrões que o valor observado está distante da média. No caso como obtivemos um z-score de -1.3109241984234394, significa que o valor observado está a 1.3x desvios padrões distante da média para o lado esquerdo da distribuição normal (Pois é menor que a média). Temos então que a partir deste valor, a probabilidade de que qualquer outro valor observado seja maior o valor que recai sobre o z-score é de 90,50%, que corresponde a área direita da distribuição normal apartir deste ponto, já que estamos verificando uma alternativa que deve ser maior. Sendo assim, verificamos que a hipótese nula falha a ser rejeitada, já que 0.9050583127590245 (valor-p próximo ao encontrado em **j.** e **k.**) é maior que nosso alfa de 0.5.
 
 <a id='regression'></a>
 ### Part III - A regression approach
@@ -742,16 +742,16 @@ results.summary()
 <table class="simpletable">
 <caption>Logit Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>     <td>converted</td>    <th>  No. Observations:  </th>   <td>290584</td>   
+  <th>Dep. Variable:</th>     <td>converted</td>    <th>  No. Observations:  </th>   <td>290584</td>
 </tr>
 <tr>
-  <th>Model:</th>               <td>Logit</td>      <th>  Df Residuals:      </th>   <td>290582</td>   
+  <th>Model:</th>               <td>Logit</td>      <th>  Df Residuals:      </th>   <td>290582</td>
 </tr>
 <tr>
-  <th>Method:</th>               <td>MLE</td>       <th>  Df Model:          </th>   <td>     1</td>   
+  <th>Method:</th>               <td>MLE</td>       <th>  Df Model:          </th>   <td>     1</td>
 </tr>
 <tr>
-  <th>Date:</th>          <td>Sun, 13 Jan 2019</td> <th>  Pseudo R-squ.:     </th>  <td>8.077e-06</td> 
+  <th>Date:</th>          <td>Sun, 13 Jan 2019</td> <th>  Pseudo R-squ.:     </th>  <td>8.077e-06</td>
 </tr>
 <tr>
   <th>Time:</th>              <td>17:15:23</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
@@ -760,12 +760,12 @@ results.summary()
   <th>converged:</th>           <td>True</td>       <th>  LL-Null:           </th> <td>-1.0639e+05</td>
 </tr>
 <tr>
-  <th> </th>                      <td> </td>        <th>  LLR p-value:       </th>   <td>0.1899</td>   
+  <th> </th>                      <td> </td>        <th>  LLR p-value:       </th>   <td>0.1899</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>
 </tr>
 <tr>
   <th>intercept</th> <td>   -1.9888</td> <td>    0.008</td> <td> -246.669</td> <td> 0.000</td> <td>   -2.005</td> <td>   -1.973</td>
@@ -779,10 +779,10 @@ results.summary()
 
 
 ```python
-# Devemos elevar as variáveis a exponencial para analisar os resultados, e como os coeficientes são negativos, 
+# Devemos elevar as variáveis a exponencial para analisar os resultados, e como os coeficientes são negativos,
 # dividimos 1 pelo resultado para facilitar a análise
 {
-    'intercept': 1/np.exp(-1.9888), 
+    'intercept': 1/np.exp(-1.9888),
     'ap_page': 1/np.exp(-0.0150)
 }
 ```
@@ -810,13 +810,13 @@ f. Now, you are considering other things that might influence whether or not an 
 Além disso é positivo utilizar outras variáveis para saber o contexto em geral, podemos cair por exemplo em um paradoxo de simpson caso o conjunto de usuários apesar de estar quase 50% em cada um dos grupos de control e treatment, não sabemos características específicas dos usuários e pode ser que cada subconjunto de usuários que compartilham as mesmas características possam estar mal distribuídos causando assim uma interpretação equivocada.
 Alguns outros dados que poderiam ser levados em consideração para análise:
 - **Perfil do usuário (Faixa de idade, Região, Sexo):** Esses fatores podem interferir quanto a até mesmo a identificação do público alvo e estreitar os casos de teste para nichos específicos.
-- **Preço:** Na análise feita é verificado se o usuário comprou ou não, mas não é verificado o quanto cada usuário comprou, pode ser que uma taxa de conversão pior com compras melhores seja mais eficáz para o modelo de negócio. 
+- **Preço:** Na análise feita é verificado se o usuário comprou ou não, mas não é verificado o quanto cada usuário comprou, pode ser que uma taxa de conversão pior com compras melhores seja mais eficáz para o modelo de negócio.
 - **Número de visitas antes da compra:** Um outro bom indicativo seria verificar quantas vezes um mesmo usuário visitou a página antes de fazer a compra em cada página, qual das páginas vendeu mais em apenas uma visita ou foi abandonada mais vezes na primeira visita também são pontos possíveis a se levar em consideração.
 - **Fonte de onde chegou até o site:** De onde veio o usuário que entrou no site? Entrou acessando a url diretamente ou foi por meio de algum anúncio em uma rede social, ou por algum mecanismo de busca? Este fator também pode favorecer para que o usuário efetue a compra mais facilmente.
 
 O ponto negativo de adicionar mais variáveis, é que cada vez a análise fica mais complexa, tornando mais difícil encontrar algum modelo que se encaixe na situação.
 
-g. Now along with testing if the conversion rate changes for different pages, also add an effect based on which country a user lives. You will need to read in the **countries.csv** dataset and merge together your datasets on the approporiate rows.  [Here](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.join.html) are the docs for joining tables. 
+g. Now along with testing if the conversion rate changes for different pages, also add an effect based on which country a user lives. You will need to read in the **countries.csv** dataset and merge together your datasets on the approporiate rows.  [Here](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.join.html) are the docs for joining tables.
 
 Does it appear that country had an impact on conversion?  Don't forget to create dummy variables for these country columns - **Hint: You will need two columns for the three dummy variables.** Provide the statistical output as well as a written response to answer this question.
 
@@ -1113,16 +1113,16 @@ results.summary()
 <table class="simpletable">
 <caption>Logit Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>     <td>converted</td>    <th>  No. Observations:  </th>   <td>290584</td>   
+  <th>Dep. Variable:</th>     <td>converted</td>    <th>  No. Observations:  </th>   <td>290584</td>
 </tr>
 <tr>
-  <th>Model:</th>               <td>Logit</td>      <th>  Df Residuals:      </th>   <td>290581</td>   
+  <th>Model:</th>               <td>Logit</td>      <th>  Df Residuals:      </th>   <td>290581</td>
 </tr>
 <tr>
-  <th>Method:</th>               <td>MLE</td>       <th>  Df Model:          </th>   <td>     2</td>   
+  <th>Method:</th>               <td>MLE</td>       <th>  Df Model:          </th>   <td>     2</td>
 </tr>
 <tr>
-  <th>Date:</th>          <td>Sun, 13 Jan 2019</td> <th>  Pseudo R-squ.:     </th>  <td>1.521e-05</td> 
+  <th>Date:</th>          <td>Sun, 13 Jan 2019</td> <th>  Pseudo R-squ.:     </th>  <td>1.521e-05</td>
 </tr>
 <tr>
   <th>Time:</th>              <td>17:15:26</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
@@ -1131,12 +1131,12 @@ results.summary()
   <th>converged:</th>           <td>True</td>       <th>  LL-Null:           </th> <td>-1.0639e+05</td>
 </tr>
 <tr>
-  <th> </th>                      <td> </td>        <th>  LLR p-value:       </th>   <td>0.1984</td>   
+  <th> </th>                      <td> </td>        <th>  LLR p-value:       </th>   <td>0.1984</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>
 </tr>
 <tr>
   <th>intercept</th> <td>   -2.0375</td> <td>    0.026</td> <td>  -78.364</td> <td> 0.000</td> <td>   -2.088</td> <td>   -1.987</td>
@@ -1171,7 +1171,7 @@ Em US é 1.042 vezes mais provável que a conversão ocorra em relação ao CA, 
 
 Nenhum valor-p é significante suficiente, e baseado também nas proporções e porcentagens de conversão, não parece que o país tem impacto nas conversões, mesmo com o tamanho da base de dados de cada país sendo bem diferente..
 
-h. Though you have now looked at the individual factors of country and page on conversion, we would now like to look at an interaction between page and country to see if there significant effects on conversion.  Create the necessary additional columns, and fit the new model.  
+h. Though you have now looked at the individual factors of country and page on conversion, we would now like to look at an interaction between page and country to see if there significant effects on conversion.  Create the necessary additional columns, and fit the new model.
 
 Provide the summary results, and your conclusions based on the results.
 
@@ -1267,16 +1267,16 @@ results.summary()
 <table class="simpletable">
 <caption>Logit Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>     <td>converted</td>    <th>  No. Observations:  </th>   <td>290584</td>   
+  <th>Dep. Variable:</th>     <td>converted</td>    <th>  No. Observations:  </th>   <td>290584</td>
 </tr>
 <tr>
-  <th>Model:</th>               <td>Logit</td>      <th>  Df Residuals:      </th>   <td>290580</td>   
+  <th>Model:</th>               <td>Logit</td>      <th>  Df Residuals:      </th>   <td>290580</td>
 </tr>
 <tr>
-  <th>Method:</th>               <td>MLE</td>       <th>  Df Model:          </th>   <td>     3</td>   
+  <th>Method:</th>               <td>MLE</td>       <th>  Df Model:          </th>   <td>     3</td>
 </tr>
 <tr>
-  <th>Date:</th>          <td>Sun, 13 Jan 2019</td> <th>  Pseudo R-squ.:     </th>  <td>2.323e-05</td> 
+  <th>Date:</th>          <td>Sun, 13 Jan 2019</td> <th>  Pseudo R-squ.:     </th>  <td>2.323e-05</td>
 </tr>
 <tr>
   <th>Time:</th>              <td>17:15:27</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
@@ -1285,12 +1285,12 @@ results.summary()
   <th>converged:</th>           <td>True</td>       <th>  LL-Null:           </th> <td>-1.0639e+05</td>
 </tr>
 <tr>
-  <th> </th>                      <td> </td>        <th>  LLR p-value:       </th>   <td>0.1760</td>   
+  <th> </th>                      <td> </td>        <th>  LLR p-value:       </th>   <td>0.1760</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>
 </tr>
 <tr>
   <th>intercept</th> <td>   -2.0300</td> <td>    0.027</td> <td>  -76.249</td> <td> 0.000</td> <td>   -2.082</td> <td>   -1.978</td>
@@ -1328,16 +1328,16 @@ results.summary()
 <table class="simpletable">
 <caption>Logit Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>     <td>converted</td>    <th>  No. Observations:  </th>   <td>290584</td>   
+  <th>Dep. Variable:</th>     <td>converted</td>    <th>  No. Observations:  </th>   <td>290584</td>
 </tr>
 <tr>
-  <th>Model:</th>               <td>Logit</td>      <th>  Df Residuals:      </th>   <td>290580</td>   
+  <th>Model:</th>               <td>Logit</td>      <th>  Df Residuals:      </th>   <td>290580</td>
 </tr>
 <tr>
-  <th>Method:</th>               <td>MLE</td>       <th>  Df Model:          </th>   <td>     3</td>   
+  <th>Method:</th>               <td>MLE</td>       <th>  Df Model:          </th>   <td>     3</td>
 </tr>
 <tr>
-  <th>Date:</th>          <td>Sun, 13 Jan 2019</td> <th>  Pseudo R-squ.:     </th>  <td>2.323e-05</td> 
+  <th>Date:</th>          <td>Sun, 13 Jan 2019</td> <th>  Pseudo R-squ.:     </th>  <td>2.323e-05</td>
 </tr>
 <tr>
   <th>Time:</th>              <td>17:15:28</td>     <th>  Log-Likelihood:    </th> <td>-1.0639e+05</td>
@@ -1346,12 +1346,12 @@ results.summary()
   <th>converged:</th>           <td>True</td>       <th>  LL-Null:           </th> <td>-1.0639e+05</td>
 </tr>
 <tr>
-  <th> </th>                      <td> </td>        <th>  LLR p-value:       </th>   <td>0.1760</td>   
+  <th> </th>                      <td> </td>        <th>  LLR p-value:       </th>   <td>0.1760</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>
 </tr>
 <tr>
   <th>intercept</th> <td>   -1.9893</td> <td>    0.009</td> <td> -223.763</td> <td> 0.000</td> <td>   -2.007</td> <td>   -1.972</td>
