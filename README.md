@@ -1,2 +1,3 @@
-# analyze-ab-test-results
-Statistics project of Fundamentals of Data Science II Nanodegree (Udacity)
+---
+permalink: /ab_test_notebook.html
+---
